@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Allocation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Patient Allocation</h1>
+    <form action="{{ url_for('match') }}" method="POST">
+        <label for="patient_name">Patient Name:</label>
+        <input type="text" id="patient_name" name="patient_name" required>
+        
+        <label for="patient_need">Patient Need (e.g., Speech, Motion):</label>
+        <input type="text" id="patient_need" name="patient_need" required>
+        
+        <input type="submit" value="Find Therapists">
+    </form>
+</body>
+</html>
