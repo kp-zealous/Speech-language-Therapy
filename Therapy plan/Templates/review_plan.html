@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Therapy Plans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Review Therapy Plans</h1>
+        <table border="1">
+            <tr>
+                <th>Patient Name</th>
+                <th>Therapy Type</th>
+                <th>Session Frequency</th>
+                <th>Therapist Notes</th>
+                <th>Status</th>
+                <th>Supervisor Comments</th>
+                <th>Action</th>
+            </tr>
+            {% for plan in plans %}
+            <tr>
+                <td>{{ plan['Patient Name'] }}</td>
+                <td>{{ plan['Therapy Type'] }}</td>
+                <td>{{ plan['Session Frequency'] }}</td>
+                <td>{{ plan['Therapist Notes'] }}</td>
+                <td>{{ plan['Status'] }}</td>
+                <td>{{ plan['Supervisor Comments'] }}</td>
+                <td>
+                    <form action="{{ url_for('update_status') }}" method="POST">
+                        <input type="hidden" name="index" value="{{ loop.index0 }}">
+                        <label for="status">Status:</label>
+                        <select name="status" required>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <label for="comments">Comments:</label>
+                        <input type="text" name="comments" required>
+                        <input type="submit" value="Update Status">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('index') }}">Back to Create Plan</a>
+    </div>
+</body>
+</html>
